@@ -1,0 +1,13 @@
+layout,traversal,k,n,ms
+row_major,coords,3,256,78.9835
+row_major,random,3,256,2387.19
+row_major,layout,3,256,237.176
+tiled,coords,3,256,387.811
+tiled,random,3,256,1886.23
+tiled,layout,3,256,915.808
+morton,coords,3,256,1283.59
+morton,random,3,256,5038.61
+morton,layout,3,256,1510.57
+hilbert,coords,3,256,3705.34
+hilbert,random,3,256,10233.8
+hilbert,layout,3,256,4108.94
