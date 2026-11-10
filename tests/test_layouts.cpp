@@ -4,6 +4,7 @@
 
 #include "layouts/row_major.hpp"
 #include "layouts/morton.hpp"
+#include "layouts/morton_fast.hpp"
 #include "layouts/hilbert.hpp"
 #include "layouts/tiled.hpp"
 
@@ -63,6 +64,32 @@ void test_morton() {
     assert(m.encode({3, 3}) == 15);
 }
 
+// has to give exactly the same indexes as the simple morton
+template <std::size_t K>
+void same_as_morton(std::uint32_t n) {
+    Morton<K> slow(n);
+    MortonFast<K> fast(n);
+    for (std::size_t idx = 0; idx < slow.size(); idx++) {
+        auto c = slow.decode(idx);
+        assert(fast.encode(c) == idx);
+        assert(fast.decode(idx) == c);
+    }
+}
+
+void test_morton_fast() {
+    for (unsigned n : {1, 2, 4, 8}) {
+        test_layout<1>(MortonFast<1>(n), n);
+        test_layout<2>(MortonFast<2>(n), n);
+        test_layout<3>(MortonFast<3>(n), n);
+        test_layout<4>(MortonFast<4>(n), n);
+
+        same_as_morton<1>(n);
+        same_as_morton<2>(n);
+        same_as_morton<3>(n);
+        same_as_morton<4>(n);
+    }
+}
+
 void test_hilbert() {
     for (unsigned n : {1, 2, 4, 8}) {
         test_layout<1>(Hilbert<1>(n), n);
@@ -113,6 +140,7 @@ void test_tiled() {
 int main() {
     test_row_major();
     test_morton();
+    test_morton_fast();
     test_hilbert();
     test_tiled();
     std::cout << "ok\n";

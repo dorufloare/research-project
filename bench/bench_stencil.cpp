@@ -1,32 +1,17 @@
 // times the stencil for every layout and traversal
 // usage: bench_stencil [K] [n]
-#include <algorithm>
 #include <array>
-#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <vector>
 
 #include "layouts/row_major.hpp"
 #include "layouts/morton.hpp"
+#include "layouts/morton_fast.hpp"
 #include "layouts/hilbert.hpp"
 #include "layouts/tiled.hpp"
 #include "kernels/stencil.hpp"
-
-// runs f once to warm up, then 5 times, returns the median time in ms
-template <typename F>
-double time_it(F f) {
-    f();
-    std::vector<double> times;
-    for (int i = 0; i < 5; i++) {
-        auto start = std::chrono::steady_clock::now();
-        f();
-        auto end = std::chrono::steady_clock::now();
-        times.push_back(std::chrono::duration<double, std::milli>(end - start).count());
-    }
-    std::sort(times.begin(), times.end());
-    return times[2];
-}
+#include "timing.hpp"
 
 double check = 0;  // we use the results so the compiler can't remove the loops
 
@@ -63,6 +48,7 @@ void run_all(std::uint32_t n) {
     run<K>("row_major", RowMajor<K>(n), n, centers);
     run<K>("tiled", Tiled<K>(n), n, centers);
     run<K>("morton", Morton<K>(n), n, centers);
+    run<K>("morton_fast", MortonFast<K>(n), n, centers);
     run<K>("hilbert", Hilbert<K>(n), n, centers);
 }
 

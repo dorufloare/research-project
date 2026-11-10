@@ -9,7 +9,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 add_compile_options(-O3 -march=native -Wall -Wextra)
-include_directories(include src sim)
+include_directories(include src sim bench)
 
 enable_testing()
 
@@ -25,3 +25,5 @@ add_test(NAME test_sim COMMAND test_sim)
 add_executable(run_tlb sim/run_tlb.cpp)
 
 add_executable(bench_stencil bench/bench_stencil.cpp)
+
+add_executable(bench_encode bench/bench_encode.cpp)
