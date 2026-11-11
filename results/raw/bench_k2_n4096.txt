@@ -1,0 +1,16 @@
+layout,traversal,k,n,min_ms,median_ms
+row_major,coords,2,4096,12.7552,13.7596
+row_major,random,2,4096,614.465,642.556
+row_major,layout,2,4096,84.1506,85.9338
+tiled,coords,2,4096,165.685,172.826
+tiled,random,2,4096,703.631,748.341
+tiled,layout,2,4096,346.462,362.948
+morton,coords,2,4096,740.917,763.462
+morton,random,2,4096,2780.23,2842.03
+morton,layout,2,4096,881.798,916.609
+morton_fast,coords,2,4096,54.8095,61.7005
+morton_fast,random,2,4096,463.833,476.256
+morton_fast,layout,2,4096,50.9424,53.4768
+hilbert,coords,2,4096,1931.31,2024.55
+hilbert,random,2,4096,6196.54,6299.17
+hilbert,layout,2,4096,2527.81,2624.46

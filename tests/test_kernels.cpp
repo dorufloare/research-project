@@ -5,9 +5,11 @@
 
 #include "layouts/row_major.hpp"
 #include "layouts/morton.hpp"
+#include "layouts/morton_fast.hpp"
 #include "layouts/hilbert.hpp"
 #include "layouts/tiled.hpp"
 #include "kernels/stencil.hpp"
+#include "kernels/stencil_light.hpp"
 
 // value of a point, doesn't depend on the layout
 template <std::size_t K>
@@ -66,6 +68,18 @@ void test_stencil(const Layout& layout, std::uint32_t n) {
         assert(out[layout.encode(c)] == expected<K>(c));
 }
 
+// the light stencil must give the same result as the normal one, with and without prefetch
+template <std::size_t K, typename Layout>
+void test_light(const Layout& layout, const std::array<std::uint64_t, K>& m, std::uint32_t n) {
+    for (std::size_t dist : {0, 64, 32768}) {
+        std::vector<double> in(layout.size() + PREFETCH_PAD), out(layout.size(), -1);
+        for (std::size_t idx = 0; idx < layout.size(); idx++)
+            in[idx] = value<K>(layout.decode(idx));
+        sweep_light<K>(m, layout.size(), in.data(), out.data(), dist);
+        check_sweep<K>(layout, out, n);
+    }
+}
+
 int main() {
     test_stencil<2>(RowMajor<2>(5), 5);
     test_stencil<3>(RowMajor<3>(5), 5);
@@ -76,6 +90,16 @@ int main() {
     test_stencil<3>(Hilbert<3>(8), 8);
     test_stencil<2>(Tiled<2>(8, 4), 8);
     test_stencil<3>(Tiled<3>(8, 4), 8);
+
+    test_light<2>(RowMajor<2>(8), row_major_masks<2>(8), 8);
+    test_light<3>(RowMajor<3>(8), row_major_masks<3>(8), 8);
+    test_light<4>(RowMajor<4>(4), row_major_masks<4>(4), 4);
+    MortonFast<2> m2(8);
+    MortonFast<3> m3(8);
+    MortonFast<4> m4(4);
+    test_light<2>(m2, m2.masks(), 8);
+    test_light<3>(m3, m3.masks(), 8);
+    test_light<4>(m4, m4.masks(), 4);
 
     std::cout << "ok\n";
 }

@@ -46,6 +46,8 @@ public:
         return c;
     }
 
+    const std::array<std::uint64_t, K>& masks() const { return mask; }
+
 private:
     std::uint32_t n;
     std::array<std::uint64_t, K> mask;

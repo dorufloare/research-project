@@ -67,7 +67,7 @@ void run_all(std::uint32_t n) {
 
 int main(int argc, char** argv) {
     int k = argc > 1 ? std::atoi(argv[1]) : 3;
-    int default_n = k == 2 ? 1024 : (k == 3 ? 128 : 32);
+    int default_n = k == 2 ? 4096 : (k == 3 ? 256 : 64);
     std::uint32_t n = argc > 2 ? std::atoi(argv[2]) : default_n;
 
     std::cout << "layout,traversal,k,n,accesses,tlb64_4k,tlb1536_4k,tlb32_2m\n";

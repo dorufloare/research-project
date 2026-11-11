@@ -31,25 +31,27 @@ void apply_stencil(const Layout& layout, const double* in, double* out,
     out[center] = sum;
 }
 
-// go through the points in coordinate order, last coordinate fastest
+// moves c to the next inner point, last coordinate fastest
+// returns false when there are no more points
+template <std::size_t K>
+bool next_point(std::array<std::uint32_t, K>& c, std::uint32_t n) {
+    for (std::size_t d = K; d > 0; d--) {
+        c[d - 1]++;
+        if (c[d - 1] < n - 1)
+            return true;
+        c[d - 1] = 1;
+    }
+    return false;
+}
+
+// go through the points in coordinate order
 template <std::size_t K, typename Layout>
 void sweep_coords(const Layout& layout, const double* in, double* out, std::uint32_t n) {
     std::array<std::uint32_t, K> c;
     c.fill(1);
-    while (true) {
+    do {
         apply_stencil<K>(layout, in, out, c);
-
-        std::size_t d = K;
-        while (d > 0) {
-            c[d - 1]++;
-            if (c[d - 1] < n - 1)
-                break;
-            c[d - 1] = 1;
-            d--;
-        }
-        if (d == 0)
-            break;
-    }
+    } while (next_point<K>(c, n));
 }
 
 // random points, made before the timing starts

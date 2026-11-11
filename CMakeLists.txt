@@ -29,3 +29,7 @@ add_executable(footprint sim/footprint.cpp)
 add_executable(bench_stencil bench/bench_stencil.cpp)
 
 add_executable(bench_encode bench/bench_encode.cpp)
+
+add_executable(bench_bandwidth bench/bench_bandwidth.cpp)
+
+add_executable(bench_light bench/bench_light.cpp)

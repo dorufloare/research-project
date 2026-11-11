@@ -5,6 +5,7 @@
 
 #include "layouts/row_major.hpp"
 #include "layouts/morton.hpp"
+#include "layouts/morton_fast.hpp"
 #include "layouts/hilbert.hpp"
 #include "layouts/tiled.hpp"
 #include "kernels/stencil.hpp"
@@ -56,12 +57,14 @@ void run_all(std::uint32_t n) {
     footprint<K>("row_major", RowMajor<K>(n), n);
     footprint<K>("tiled", Tiled<K>(n), n);
     footprint<K>("morton", Morton<K>(n), n);
+    footprint<K>("morton_fast", MortonFast<K>(n), n);
     footprint<K>("hilbert", Hilbert<K>(n), n);
 }
 
 int main() {
     std::cout << "layout,k,n,lines,pages\n";
-    run_all<2>(64);
-    run_all<3>(64);
+    // same sizes as the default ones in bench_stencil
+    run_all<2>(4096);
+    run_all<3>(256);
     run_all<4>(64);
 }
