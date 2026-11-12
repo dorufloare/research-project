@@ -5,9 +5,11 @@
 #include <iostream>
 #include <vector>
 
+#include "pages.hpp"
 #include "timing.hpp"
 
 int main(int argc, char** argv) {
+    small_pages_only();
     std::size_t mb = argc > 1 ? std::atoi(argv[1]) : 128;
     std::size_t count = mb * 1024 * 1024 / sizeof(double);
     std::vector<double> in(count, 1.0);
@@ -34,4 +36,5 @@ int main(int argc, char** argv) {
     std::cout << "read," << mb << "," << read_ms << "," << bytes / read_ms / 1e6 << "\n";
     std::cout << "copy," << mb << "," << copy_ms << "," << 2 * bytes / copy_ms / 1e6 << "\n";
     std::cerr << "check: " << check << "\n";
+    std::cerr << huge_pages_in_use() << "\n";
 }

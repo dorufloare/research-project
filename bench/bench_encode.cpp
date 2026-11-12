@@ -56,5 +56,6 @@ int main() {
     run_all<3>(n);
     run_all<4>(n);
     run_all<5>(n);
+    run_all<6>(n);
     std::cerr << "check: " << check << "\n";
 }

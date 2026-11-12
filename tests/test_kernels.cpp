@@ -91,15 +91,32 @@ int main() {
     test_stencil<2>(Tiled<2>(8, 4), 8);
     test_stencil<3>(Tiled<3>(8, 4), 8);
 
+    for (std::uint32_t n : {4, 8}) {
+        test_stencil<5>(RowMajor<5>(n), n);
+        test_stencil<5>(Morton<5>(n), n);
+        test_stencil<5>(Hilbert<5>(n), n);
+        test_stencil<5>(Tiled<5>(n, 2), n);
+    }
+    test_stencil<6>(RowMajor<6>(4), 4);
+    test_stencil<6>(Morton<6>(4), 4);
+    test_stencil<6>(Hilbert<6>(4), 4);
+    test_stencil<6>(Tiled<6>(4, 2), 4);
+
     test_light<2>(RowMajor<2>(8), row_major_masks<2>(8), 8);
     test_light<3>(RowMajor<3>(8), row_major_masks<3>(8), 8);
     test_light<4>(RowMajor<4>(4), row_major_masks<4>(4), 4);
+    test_light<5>(RowMajor<5>(4), row_major_masks<5>(4), 4);
+    test_light<6>(RowMajor<6>(4), row_major_masks<6>(4), 4);
     MortonFast<2> m2(8);
     MortonFast<3> m3(8);
     MortonFast<4> m4(4);
+    MortonFast<5> m5(4);
+    MortonFast<6> m6(4);
     test_light<2>(m2, m2.masks(), 8);
     test_light<3>(m3, m3.masks(), 8);
     test_light<4>(m4, m4.masks(), 4);
+    test_light<5>(m5, m5.masks(), 4);
+    test_light<6>(m6, m6.masks(), 4);
 
     std::cout << "ok\n";
 }

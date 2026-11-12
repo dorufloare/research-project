@@ -67,4 +67,6 @@ int main() {
     run_all<2>(4096);
     run_all<3>(256);
     run_all<4>(64);
+    run_all<5>(32);
+    run_all<6>(16);
 }

@@ -1,0 +1,9 @@
+layout,pages,traversal,k,n,min_ms,median_ms
+row_major,4k,random,5,32,2821.6,2934.33
+row_major,4k,coords,5,32,165.358,172.041
+row_major,2m,random,5,32,2264.38,2340.07
+row_major,2m,coords,5,32,162.657,176.915
+morton_fast,4k,random,5,32,1993.13,2115.5
+morton_fast,4k,coords,5,32,263.396,306.002
+morton_fast,2m,random,5,32,1604.94,1659.22
+morton_fast,2m,coords,5,32,268.948,299.44

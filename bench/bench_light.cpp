@@ -6,6 +6,7 @@
 
 #include "kernels/stencil_light.hpp"
 #include "layouts/morton_fast.hpp"
+#include "pages.hpp"
 #include "timing.hpp"
 
 const int ROUNDS = 15;
@@ -39,8 +40,9 @@ void run_all(std::uint32_t n) {
 }
 
 int main(int argc, char** argv) {
+    small_pages_only();
     int k = argc > 1 ? std::atoi(argv[1]) : 3;
-    int default_n = k == 2 ? 4096 : (k == 3 ? 256 : 64);
+    int default_n = k == 2 ? 4096 : k == 3 ? 256 : k == 4 ? 64 : k == 5 ? 32 : 16;
     std::uint32_t n = argc > 2 ? std::atoi(argv[2]) : default_n;
 
     std::cout << "layout,distance,k,n,min_ms,median_ms\n";
@@ -50,6 +52,11 @@ int main(int argc, char** argv) {
         run_all<3>(n);
     else if (k == 4)
         run_all<4>(n);
+    else if (k == 5)
+        run_all<5>(n);
+    else if (k == 6)
+        run_all<6>(n);
     else
-        std::cerr << "K has to be 2, 3 or 4\n";
+        std::cerr << "K has to be between 2 and 6\n";
+    std::cerr << huge_pages_in_use() << "\n";
 }

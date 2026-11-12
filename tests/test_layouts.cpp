@@ -39,6 +39,8 @@ void test_row_major() {
         test_layout<2>(RowMajor<2>(n), n);
         test_layout<3>(RowMajor<3>(n), n);
         test_layout<4>(RowMajor<4>(n), n);
+        test_layout<5>(RowMajor<5>(n), n);
+        test_layout<6>(RowMajor<6>(n), n);
     }
 
     RowMajor<3> r(4);
@@ -53,6 +55,8 @@ void test_morton() {
         test_layout<2>(Morton<2>(n), n);
         test_layout<3>(Morton<3>(n), n);
         test_layout<4>(Morton<4>(n), n);
+        test_layout<5>(Morton<5>(n), n);
+        test_layout<6>(Morton<6>(n), n);
     }
 
     // values checked by hand on the 4x4 grid
@@ -82,11 +86,15 @@ void test_morton_fast() {
         test_layout<2>(MortonFast<2>(n), n);
         test_layout<3>(MortonFast<3>(n), n);
         test_layout<4>(MortonFast<4>(n), n);
+        test_layout<5>(MortonFast<5>(n), n);
+        test_layout<6>(MortonFast<6>(n), n);
 
         same_as_morton<1>(n);
         same_as_morton<2>(n);
         same_as_morton<3>(n);
         same_as_morton<4>(n);
+        same_as_morton<5>(n);
+        same_as_morton<6>(n);
     }
 }
 
@@ -96,11 +104,15 @@ void test_hilbert() {
         test_layout<2>(Hilbert<2>(n), n);
         test_layout<3>(Hilbert<3>(n), n);
         test_layout<4>(Hilbert<4>(n), n);
+        test_layout<5>(Hilbert<5>(n), n);
+        test_layout<6>(Hilbert<6>(n), n);
 
         test_neighbours<1>(Hilbert<1>(n));
         test_neighbours<2>(Hilbert<2>(n));
         test_neighbours<3>(Hilbert<3>(n));
         test_neighbours<4>(Hilbert<4>(n));
+        test_neighbours<5>(Hilbert<5>(n));
+        test_neighbours<6>(Hilbert<6>(n));
     }
 
     // starts in the corner
@@ -117,6 +129,8 @@ void test_tiled() {
             test_layout<2>(Tiled<2>(n, t), n);
             test_layout<3>(Tiled<3>(n, t), n);
             test_layout<4>(Tiled<4>(n, t), n);
+            test_layout<5>(Tiled<5>(n, t), n);
+            test_layout<6>(Tiled<6>(n, t), n);
         }
     }
 
