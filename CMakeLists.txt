@@ -35,3 +35,5 @@ add_executable(bench_bandwidth bench/bench_bandwidth.cpp)
 add_executable(bench_light bench/bench_light.cpp)
 
 add_executable(bench_hugepages bench/bench_hugepages.cpp)
+
+add_executable(bench_size bench/bench_size.cpp)
