@@ -1,9 +1,9 @@
 layout,pages,traversal,k,n,min_ms,median_ms
-row_major,4k,random,4,64,1279.2,1392.2
-row_major,4k,coords,4,64,79.7054,88.3469
-row_major,2m,random,4,64,1077.23,1142.3
-row_major,2m,coords,4,64,89.3041,100.277
-morton_fast,4k,random,4,64,877.824,954.918
-morton_fast,4k,coords,4,64,137.412,166.37
-morton_fast,2m,random,4,64,750.398,765.846
-morton_fast,2m,coords,4,64,160.515,182.282
+row_major,4k,random,4,64,1408.86,1423.31
+row_major,4k,coords,4,64,38.0819,41.1078
+row_major,2m,random,4,64,1184.45,1198.7
+row_major,2m,coords,4,64,85.1304,92.4099
+morton_fast,4k,random,4,64,947.168,961.792
+morton_fast,4k,coords,4,64,82.8582,86.6548
+morton_fast,2m,random,4,64,781.904,814.751
+morton_fast,2m,coords,4,64,128.134,141.165

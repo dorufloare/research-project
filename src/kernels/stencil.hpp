@@ -16,8 +16,10 @@ bool is_inside(const std::array<std::uint32_t, K>& c, std::uint32_t n) {
 }
 
 // sum of the cell and its 2K neighbours, c must not be on the border
+// always_inline: gcc inlined this for some layouts and K and not for others,
+// and a call per cell made the coords sweep up to 3x slower
 template <std::size_t K, typename Layout>
-void apply_stencil(const Layout& layout, const double* in, double* out,
+[[gnu::always_inline]] inline void apply_stencil(const Layout& layout, const double* in, double* out,
                    std::array<std::uint32_t, K> c) {
     std::size_t center = layout.encode(c);
     double sum = in[center];
