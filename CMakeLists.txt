@@ -26,6 +26,8 @@ add_executable(run_tlb sim/run_tlb.cpp)
 
 add_executable(footprint sim/footprint.cpp)
 
+add_executable(miss_offsets sim/miss_offsets.cpp)
+
 add_executable(bench_stencil bench/bench_stencil.cpp)
 
 add_executable(bench_encode bench/bench_encode.cpp)
